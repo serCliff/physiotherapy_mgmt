@@ -1,0 +1,70 @@
+<odoo>
+    <data>
+
+    <!--FORM-->
+        <record model="ir.ui.view" id="res_partner_patient_data">
+            <field name="name">res.partner.patient.data</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+              <!--Physiotherapy Data-->
+                <notebook position="inside">
+                    <page name="physioterapy" string="Physioterapy">
+                        <group>
+                            <group>
+                                <field name="physiotherapy_partner"/>
+                                <field name="birth_date"/>
+                                <field name="gender"/>
+                                <field name="civil_state"/>
+                                <field name="allergies"/>
+                                <field name="style_of_life"/>
+                                <field name="sport_practice"/>
+                                <field name="sport_id"/>
+                                <field name="sport_periodicity"/>
+                            </group>
+                            <group>
+                                <field name="personal_history_id"/>
+                                <field name="familiar_history_id"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <!--PERMISOS COMERCIAL    -->
+<!--        <record model="ir.ui.view" id="res_partner_referral_commercial_permissions">-->
+<!--            <field name="name">res.partner.permissions</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="inherit_id" ref="res_partner_referral_gifts"/>-->
+<!--            <field name="groups_id" eval="[(4, ref('am_personalizations.group_commercial'))]"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="product_ids" position="attributes">-->
+<!--                    <attribute name="domain">[('uds', '>', 0)]</attribute>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+        <!--SEARCH FILTERS-->
+        <record model="ir.ui.view" id="res_partner_gift_search_filters">
+            <field name="name">res.partner.filters</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+
+                <!-- Physiotherapy partners-->
+                <separator position="after">
+                    <filter name="filter_physiotherapy" help="Physiotherapy" domain="[('physiotherapy_partner','=',True)]"/>
+                </separator>
+
+            </field>
+        </record>
+
+
+
+
+    </data>
+</odoo>
+
