@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem id="physiotherapy_menu_root"
+              name="Physiotherapy"
+              web_icon="physiotherapy_mgmt,static/description/bottle.png"
+              sequence="14"/>
+
+<!--    <menuitem id="events_reports"-->
+<!--              name="Reports"-->
+<!--              parent="events_menu_root"-->
+<!--              groups="events_and_celebrations_mgmt.group_events_manager"-->
+<!--              sequence="5"/>-->
+
+<!--    <menuitem id="events_config"-->
+<!--              name="Configuration"-->
+<!--              parent="events_menu_root"-->
+<!--              groups="events_and_celebrations_mgmt.group_events_manager"-->
+<!--              sequence="18"/>-->
+
+<!--    <menuitem id="events_config_events"-->
+<!--              name="Events"-->
+<!--              parent="events_config"-->
+<!--              sequence="1"/>-->
+
+<!--    <menuitem id="events_config_purpose"-->
+<!--              name="Purpose"-->
+<!--              parent="events_config"-->
+<!--              sequence="2"/>-->
+
+</odoo>

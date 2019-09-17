@@ -1,4 +1,16 @@
 from odoo import fields, models, api
+import pdb
+
+FIELDS_PHYSIOTHERAPY = ['birth_date',
+                        'gender',
+                        'civil_state',
+                        'allergies',
+                        'style_of_life',
+                        'sport_practice',
+                        'sport_id',
+                        'sport_periodicity',
+                        'personal_history_id',
+                        'familiar_history_id', ]
 
 
 class ResPartner(models.Model):
@@ -20,3 +32,23 @@ class ResPartner(models.Model):
     familiar_history_id = fields.Many2many("familiar.history",  'familiar_history_rel', 'partner_id',
                                            'familiar_history_id', string="Familiar history")
 
+    @api.model
+    def create(self, values):
+        self.check_physiotherapy(values)
+        return super().create(values)
+
+    @api.multi
+    def write(self, values):
+        self.check_physiotherapy(values)
+        return super().write(values)
+
+    @staticmethod
+    def check_physiotherapy(values):
+        """
+        Method to mark what partners are physiotherapy patients also.
+        """
+        s1 = set(values.keys())
+        s2 = set(FIELDS_PHYSIOTHERAPY)
+        res = s1.intersection(s2)
+        if res:
+            values['physiotherapy_partner'] = True
