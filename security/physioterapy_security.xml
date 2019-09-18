@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-    <record model="ir.module.category" id="module_events_and_celebrations_mgmt">
-        <field name="name">Events</field>
-        <field name="description">Events</field>
+    <record model="ir.module.category" id="module_physiotherapy_mgmt">
+        <field name="name">Physiotherapy</field>
+        <field name="description">Physiotherapy</field>
         <field name="sequence">18</field>
     </record>
 
-    <record id="group_events_create_purpose" model="res.groups">
-        <field name="name">Create Purpose</field>
-        <field name="category_id" ref="events_and_celebrations_mgmt.module_events_and_celebrations_mgmt"/>
+    <record id="group_physiotherapy_doctor" model="res.groups">
+        <field name="name">Doctor</field>
+        <field name="category_id" ref="physiotherapy_mgmt.module_physiotherapy_mgmt"/>
     </record>
 
-    <record id="group_events_create_events" model="res.groups">
-        <field name="name">Create Event</field>
-        <field name="category_id" ref="events_and_celebrations_mgmt.module_events_and_celebrations_mgmt"/>
-    </record>
-
-    <record id="group_events_manager" model="res.groups">
-        <field name="name">Manager Events</field>
-        <field name="category_id" ref="events_and_celebrations_mgmt.module_events_and_celebrations_mgmt"/>
+    <record id="group_physiotherapy_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="implied_ids" eval="[(4, ref('physiotherapy_mgmt.group_physiotherapy_doctor'))]"/>
+        <field name="category_id" ref="physiotherapy_mgmt.module_physiotherapy_mgmt"/>
     </record>
 
 </odoo>

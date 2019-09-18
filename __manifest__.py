@@ -20,7 +20,7 @@
     ],
 
     'data': [
-        # 'security/physioterapy_security.xml',
+        'security/physioterapy_security.xml',
         'security/ir.model.access.csv',
         'views/physiotherapy_view.xml',
         'views/res_partner.xml',

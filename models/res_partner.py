@@ -1,21 +1,33 @@
 from odoo import fields, models, api
 import pdb
 
-FIELDS_PHYSIOTHERAPY = ['birth_date',
-                        'gender',
-                        'civil_state',
-                        'allergies',
-                        'style_of_life',
-                        'sport_practice',
-                        'sport_id',
-                        'sport_periodicity',
-                        'personal_history_id',
-                        'familiar_history_id', ]
+
+class PartnerRelatedFields(models.AbstractModel):
+    _name = "physiotherapy.fields"
+    _description = "Fields related with partner to be used on physiotherapy"
+
+    partner_id = fields.Many2one("res.partner", "Partner", required=True)
+
+    # Partner related fields
+    birth_date = fields.Date(related='partner_id.birth_date')
+    gender = fields.Selection(related='partner_id.gender')
+    civil_state = fields.Selection(related='partner_id.civil_state')
+    allergies = fields.Char(related='partner_id.allergies')
+    style_of_life = fields.Char(related='partner_id.style_of_life')
+    sport_practice = fields.Boolean(related='partner_id.sport_practice')
+    sport_id = fields.Many2one(related='partner_id.sport_id')
+    sport_periodicity = fields.Selection(related='partner_id.sport_periodicity')
+    personal_history_id = fields.Many2many(related='partner_id.personal_history_id')
+    familiar_history_id = fields.Many2many(related='partner_id.familiar_history_id')
 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
+    treatment_ids = fields.One2many('partner.treatment', 'partner_id', "Treatments")
+    treatment_history_ids = fields.One2many('treatment.history', 'partner_id', "Treatment Histories")
+
+    # IMPORTANT (physiotherapy.fields): Each of the next fields that need to be appearing on treatments repeat on physiotherapy.fields model
     physiotherapy_partner = fields.Boolean("Physiotherapy Partner")
     birth_date = fields.Date('Date of Birth')
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender")
@@ -42,13 +54,14 @@ class ResPartner(models.Model):
         self.check_physiotherapy(values)
         return super().write(values)
 
-    @staticmethod
-    def check_physiotherapy(values):
+    def check_physiotherapy(self, values):
         """
         Method to mark what partners are physiotherapy patients also.
         """
         s1 = set(values.keys())
-        s2 = set(FIELDS_PHYSIOTHERAPY)
+        # Get all physiotherapy fields and remove no needed standard fields
+        treatment_fields = set(self.env['physiotherapy.fields'].fields_get().keys())
+        s2 = treatment_fields.difference(['__last_update', 'id', 'display_name', 'partner_id'])
         res = s1.intersection(s2)
         if res:
             values['physiotherapy_partner'] = True

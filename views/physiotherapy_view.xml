@@ -3,7 +3,8 @@
 
     <menuitem id="physiotherapy_menu_root"
               name="Physiotherapy"
-              web_icon="physiotherapy_mgmt,static/description/bottle.png"
+              groups="physiotherapy_mgmt.group_physiotherapy_doctor"
+              web_icon="physiotherapy_mgmt,static/description/estetoscopio2.png"
               sequence="14"/>
 
 <!--    <menuitem id="events_reports"-->
@@ -12,11 +13,11 @@
 <!--              groups="events_and_celebrations_mgmt.group_events_manager"-->
 <!--              sequence="5"/>-->
 
-<!--    <menuitem id="events_config"-->
-<!--              name="Configuration"-->
-<!--              parent="events_menu_root"-->
-<!--              groups="events_and_celebrations_mgmt.group_events_manager"-->
-<!--              sequence="18"/>-->
+    <menuitem id="physiotherapy_config"
+              name="Configuration"
+              parent="physiotherapy_menu_root"
+              groups="physiotherapy_mgmt.group_physiotherapy_manager"
+              sequence="18"/>
 
 <!--    <menuitem id="events_config_events"-->
 <!--              name="Events"-->
