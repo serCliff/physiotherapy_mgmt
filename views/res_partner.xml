@@ -248,6 +248,9 @@
                                 </form>
                             </field>
                         </page>
+                        <page name="treatments" string="Treatments">
+                            <field name="treatment_ids" context="{'default_partner_id': active_id}"/>
+                        </page>
                         <page name='sales_purchases' string="Sales &amp; Purchases"  invisible="1">
                             <group name="container_row_2">
                                 <group string="Sale" name="sale">

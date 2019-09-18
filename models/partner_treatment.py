@@ -17,6 +17,27 @@ class PartnerTreatment(models.Model):
 
     name = fields.Char("Name", required=True)
     observations = fields.Text("Observations", help="Duration? Origins? Influences?")
+    create_date = fields.Datetime(default=lambda self: fields.Datetime.now(), readonly=True)
+
+    treatment_history_ids = fields.One2many("treatment.history", "treatment_id", "Treatment Histories")
+
+    # RED FLAGS
+    several_illness = fields.Boolean()
+    several_illness_text = fields.Char()
+    movement_illness = fields.Boolean(help="Not modified with medication or postion")
+    movement_illness_text = fields.Char()
+    nocturnal_illness = fields.Boolean()
+    nocturnal_illness_text = fields.Char()
+    illness_without_background = fields.Boolean(help="Several illness without traumatic background")
+    illness_without_background_text = fields.Char()
+    several_muscle_spasm = fields.Boolean()
+    several_muscle_spasm_text = fields.Char()
+    psychological_trastorn = fields.Boolean()
+    psychological_trastorn_text = fields.Char()
+    missing_correlation = fields.Boolean(help="Missing correlation between test and physical researching")
+    missing_correlation_text = fields.Char()
+    hormonal_alterations = fields.Boolean()
+    hormonal_alterations_text = fields.Char()
 
     # TYPE OF ILLNESS
     # - pathology
@@ -65,6 +86,25 @@ class PartnerTreatment(models.Model):
     mitigating = fields.Char()
     # - diary activities
     diary_activities = fields.Char()
+
+    # SPECIAL QUESTIONS
+    dx_test = fields.Text()
+    general_health = fields.Text()
+    involuntary_thinning = fields.Boolean()
+    social_history = fields.Text()
+    medicines = fields.Text()
+    emotional_factors = fields.Text()
+    hormonal_factors = fields.Text()
+    headache = fields.Text(help="Dizziness, headache, painful trivial activity")
+    treatments_received = fields.Text()
+
+    # HISTORY
+    what_happens = fields.Text()
+    environment = fields.Text(help="When? How? Where?")
+
+    # HYPOTHESIS
+    initial_hypothesis = fields.Text(required=True)
+
 
 
 

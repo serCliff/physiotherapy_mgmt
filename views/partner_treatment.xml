@@ -1,0 +1,295 @@
+<odoo>
+    <data>
+
+<!--        FROM-->
+        <record model="ir.ui.view" id="view_treatment_form">
+            <field name="name">partner.treatment.form</field>
+            <field name="model">partner.treatment</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <form string="Treatments">
+                    <sheet>
+<!--                        <div class="oe_button_box" name="button_box">-->
+<!--                            <button name="toggle_active" type="object" invisible="1"-->
+<!--                                    class="oe_stat_button" icon="fa-archive">-->
+<!--                                <field name="active" widget="boolean_button"-->
+<!--                                    options='{"terminology": "archive"}'/>-->
+<!--                            </button>-->
+<!--                        </div>-->
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Name"/>
+                            </h1>
+                            <div class="o_row">
+                                <field name="partner_id"/>
+                                <field name="create_date" readonly="True"/>
+                            </div>
+                        </div>
+
+                        <group>
+                            <group name="general">
+                                <field name="birth_date"/>
+                                <field name="gender"/>
+                                <field name="civil_state"/>
+                                <field name="allergies"/>
+                            </group>
+                            <group name="work_info">
+                                <field name="function" placeholder="e.g. Sales Director"/>
+                                <field name="style_of_life"/>
+                            </group>
+                            <group name="sports">
+                                <field name="sport_practice" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="sport_id" attrs="{'invisible': [('sport_practice', '=', False)]}"/>
+                                <field name="sport_periodicity" attrs="{'invisible': [('sport_practice', '=', False)]}"/>
+                            </group>
+                            <group name="history">
+                                <field name="personal_history_id" widget="many2many_tags"/>
+                                <field name="familiar_history_id" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <label for="observations"/>
+                        <field name="observations"/>
+
+
+                        <notebook>
+                            <page name='red_flags' string="Red Flags" autofocus="autofocus">
+                                <group name="red_flags">
+                                    <label for="several_illness"/>
+                                    <div class="o_row">
+                                        <field name="several_illness"/>
+                                        <field name="several_illness_text" attrs="{'invisible': [('several_illness', '=', False)]}"/>
+                                    </div>
+                                    <label for="movement_illness"/>
+                                    <div class="o_row">
+                                        <field name="movement_illness"/>
+                                        <field name="movement_illness_text" attrs="{'invisible': [('movement_illness', '=', False)]}"/>
+                                    </div>
+                                    <label for="nocturnal_illness"/>
+                                    <div class="o_row">
+                                        <field name="nocturnal_illness"/>
+                                        <field name="nocturnal_illness_text" attrs="{'invisible': [('nocturnal_illness', '=', False)]}"/>
+                                    </div>
+                                    <label for="illness_without_background"/>
+                                    <div class="o_row">
+                                        <field name="illness_without_background"/>
+                                        <field name="illness_without_background_text" attrs="{'invisible': [('illness_without_background', '=', False)]}"/>
+                                    </div>
+                                    <label for="several_muscle_spasm"/>
+                                    <div class="o_row">
+                                        <field name="several_muscle_spasm"/>
+                                        <field name="several_muscle_spasm_text" attrs="{'invisible': [('several_muscle_spasm', '=', False)]}"/>
+                                    </div>
+                                    <label for="psychological_trastorn"/>
+                                    <div class="o_row">
+                                        <field name="psychological_trastorn"/>
+                                        <field name="psychological_trastorn_text" attrs="{'invisible': [('psychological_trastorn', '=', False)]}"/>
+                                    </div>
+                                    <label for="missing_correlation"/>
+                                    <div class="o_row">
+                                        <field name="missing_correlation"/>
+                                        <field name="missing_correlation_text" attrs="{'invisible': [('missing_correlation', '=', False)]}"/>
+                                    </div>
+                                    <label for="hormonal_alterations"/>
+                                    <div class="o_row">
+                                        <field name="hormonal_alterations"/>
+                                        <field name="hormonal_alterations_text" attrs="{'invisible': [('hormonal_alterations', '=', False)]}"/>
+                                    </div>
+                                </group>
+                            </page>
+                            <page name='type_of_illness' string="Type Of Illness">
+                                <group>
+                                    <group name="pathology" string="Pathology">
+                                        <field name="neurophatic"/>
+                                        <field name="nociceptive"/>
+                                        <field name="psychogenic"/>
+                                    </group>
+                                    <group name="course" string="Course">
+                                        <field name="continuous"/>
+                                        <field name="irruptive"/>
+                                        <field name="incidental"/>
+                                    </group>
+                                    <group name="location" string="Location">
+                                        <field name="somatic"/>
+                                        <field name="visceral"/>
+                                    </group>
+                                    <group name="intensity" string="Intensity">
+                                        <field name="intensity"/>
+                                        <label for="mechanic"/>
+                                        <div class="o_row">
+                                            <field name="mechanic"/>
+                                            <field name="mechanic_text" attrs="{'invisible': [('mechanic', '=', False)]}"/>
+                                        </div>
+                                        <label for="ischemic"/>
+                                        <div class="o_row">
+                                            <field name="ischemic"/>
+                                            <field name="ischemic_text" attrs="{'invisible': [('ischemic', '=', False)]}"/>
+                                        </div>
+                                        <label for="chemical_inflammatory"/>
+                                        <div class="o_row">
+                                            <field name="chemical_inflammatory"/>
+                                            <field name="chemical_inflammatory_text" attrs="{'invisible': [('chemical_inflammatory', '=', False)]}"/>
+                                        </div>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name='location_of_illness' string="Location Of Illness">
+                                <group>
+                                    <group name="profundity" string="Profundity">
+                                        <field name="shallow"/>
+                                        <field name="deep"/>
+                                    </group>
+                                    <group name="intensity" string="Intensity">
+                                        <field name="intensity_now"/>
+                                        <field name="intensity_most"/>
+                                    </group>
+                                    <group name="irritating" string="Irritating">
+                                        <label for="irritating_week"/>
+                                        <div class="o_row">
+                                            <field name="irritating_week"/>
+                                            <field name="irritating_week_text" attrs="{'invisible': [('irritating_week', '=', False)]}"/>
+                                        </div>
+                                        <label for="irritating_weekend"/>
+                                        <div class="o_row">
+                                            <field name="irritating_weekend"/>
+                                            <field name="irritating_weekend_text" attrs="{'invisible': [('irritating_weekend', '=', False)]}"/>
+                                        </div>
+                                    </group>
+                                    <group name="abnormal_sensations" string="Abnormal sensations">
+                                        <field name="abnormal_sensations"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name='behaviour_of_symptoms' string="Behaviour of simptons">
+                                <group>
+                                    <group name="limitations" string="During 24 hours">
+                                        <field name="functionality"/>
+                                        <field name="positional"/>
+                                        <field name="pain_development"/>
+                                    </group>
+                                    <group name="activities" string="Activities">
+                                        <field name="aggravating"/>
+                                        <field name="mitigating"/>
+                                        <field name="diary_activities"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name='special_questions' string="Special Questions">
+                                <group name="special_questions">
+                                    <field name="dx_test"/>
+                                    <field name="general_health"/>
+                                    <field name="involuntary_thinning"/>
+                                    <field name="social_history"/>
+                                    <field name="medicines"/>
+                                    <field name="emotional_factors"/>
+                                    <field name="hormonal_factors"/>
+                                    <field name="headache"/>
+                                    <field name="treatments_received"/>
+                                </group>
+                            </page>
+                            <page name='history' string="History">
+                                <group name="history">
+                                    <field name="what_happens"/>
+                                    <field name="environment"/>
+                                </group>
+                            </page>
+                            <page name='hypothesis' string="Hypothesis">
+                                <group name="hypothesis">
+                                    <field name="initial_hypothesis"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+<!--        TREE-->
+        <record id="view_treatment_tree" model="ir.ui.view">
+            <field name="name">partner.treatment.tree</field>
+            <field name="model">partner.treatment</field>
+            <field name="arch" type="xml">
+                <tree string="Treatments">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="create_date"/>
+                    <field name="create_date"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="observations"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+<!--        SEARCH FILTERS-->
+        <record id="view_treatment_filter" model="ir.ui.view">
+            <field name="name">partner.treatment.search</field>
+            <field name="model">partner.treatment</field>
+            <field name="arch" type="xml">
+                <search string="Treatment">
+                    <field name="name" string="Treatment" filter_domain="[('name','ilike',self)]"/>
+                    <field name="partner_id" />
+                    <group expand="0" string="Group By">
+                        <filter name="partner_id" string="Partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter name="create_date" string="Create Date" domain="[]" context="{'group_by':'create_date'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+
+<!--        ACTIONS-->
+        <record id="action_treatment_form" model="ir.actions.act_window">
+            <field name="name">Treatments</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">partner.treatment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_treatment_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a treatment for a partner.
+              </p>
+            </field>
+        </record>
+
+
+        <record id="action_treatment_form_view" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_treatment_form"/>
+            <field name="act_window_id" ref="action_treatment_form"/>
+        </record>
+        <record id="action_partner_tree_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_treatment_tree"/>
+            <field name="act_window_id" ref="action_treatment_form"/>
+        </record>
+
+
+
+<!--        MENUITEM-->
+        <menuitem id="partner_treatment_menu_crm"
+            parent="physiotherapy_mgmt.physiotherapy_menu_root"
+            action="physiotherapy_mgmt.action_treatment_form"
+            sequence="2"/>
+
+
+
+    </data>
+</odoo>
+
+
+        <!--PERMISOS COMERCIAL    -->
+<!--        <record model="ir.ui.view" id="res_partner_referral_commercial_permissions">-->
+<!--            <field name="name">res.partner.permissions</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="inherit_id" ref="res_partner_referral_gifts"/>-->
+<!--            <field name="groups_id" eval="[(4, ref('am_personalizations.group_commercial'))]"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="product_ids" position="attributes">-->
+<!--                    <attribute name="domain">[('uds', '>', 0)]</attribute>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->

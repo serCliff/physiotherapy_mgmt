@@ -6,6 +6,8 @@ class PartnerRelatedFields(models.AbstractModel):
     _name = "physiotherapy.fields"
     _description = "Fields related with partner to be used on physiotherapy"
 
+    company_id = fields.Many2one('res.company', string='Company', index=True,
+                                 default=lambda self: self.env.user.company_id.id)
     partner_id = fields.Many2one("res.partner", "Partner", required=True)
 
     # Partner related fields
@@ -13,6 +15,7 @@ class PartnerRelatedFields(models.AbstractModel):
     gender = fields.Selection(related='partner_id.gender')
     civil_state = fields.Selection(related='partner_id.civil_state')
     allergies = fields.Char(related='partner_id.allergies')
+    function = fields.Char(related='partner_id.function')
     style_of_life = fields.Char(related='partner_id.style_of_life')
     sport_practice = fields.Boolean(related='partner_id.sport_practice')
     sport_id = fields.Many2one(related='partner_id.sport_id')
@@ -25,10 +28,12 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     treatment_ids = fields.One2many('partner.treatment', 'partner_id', "Treatments")
+    treatment_count = fields.Integer(compute='count_treatments')
     treatment_history_ids = fields.One2many('treatment.history', 'partner_id', "Treatment Histories")
-
-    # IMPORTANT (physiotherapy.fields): Each of the next fields that need to be appearing on treatments repeat on physiotherapy.fields model
     physiotherapy_partner = fields.Boolean("Physiotherapy Partner")
+
+    # IMPORTANT (physiotherapy.fields): Each of the next fields that need to be appearing on treatments
+    # NEEDED: repeat on physiotherapy.fields model
     birth_date = fields.Date('Date of Birth')
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender")
     civil_state = fields.Selection([('single', 'Single'), ('married', 'Married')], string="Civil State")
@@ -61,7 +66,18 @@ class ResPartner(models.Model):
         s1 = set(values.keys())
         # Get all physiotherapy fields and remove no needed standard fields
         treatment_fields = set(self.env['physiotherapy.fields'].fields_get().keys())
-        s2 = treatment_fields.difference(['__last_update', 'id', 'display_name', 'partner_id'])
+        s2 = treatment_fields.difference(['__last_update',
+                                          'id',
+                                          'company_id',
+                                          'display_name',
+                                          'function',
+                                          'partner_id'])
         res = s1.intersection(s2)
         if res:
             values['physiotherapy_partner'] = True
+
+
+    @api.multi
+    def count_treatments(self):
+        if self.treatment_ids:
+            self.treatment_count = len(self.treatment_ids.ids)
