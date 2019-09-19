@@ -1,0 +1,75 @@
+<odoo>
+    <data>
+
+<!--        FROM-->
+        <record model="ir.ui.view" id="view_treatment_history_form">
+            <field name="name">treatment.history.form</field>
+            <field name="model">treatment.history</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <form string="History">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Name"/>
+                            </h1>
+                            <div class="o_row">
+                                <field name="partner_id"/>
+                                <field name="treatment_id"/>
+                                <field name="create_date" readonly="True"/>
+                            </div>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="cervical" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="dorsal" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="lumbar" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="superior" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="inferior" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="temporomandibular" widget="boolean_toggle" class="oe_edit_only"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name='cervical' string="CERVICAL" autofocus="autofocus" attrs="{'invisible': [('cervical', '=', False)]}">
+                                <field name="cervical_act_over_ids"/>
+                                <field name="cervical_dif_test_ids"/>
+                                <field name="cervical_quadrant_ids"/>
+                                <field name="cervical_pa_ids"/>
+                                <field name="cervical_physiological_passive_ids"/>
+                                <field name="cervical_special_test_ids"/>
+                                <field name="cervical_evaluation_ids"/>
+                            </page>
+                            <page name='dorsal' string="DORSAL" attrs="{'invisible': [('dorsal', '=', False)]}">
+                                <field name="dorsal_act_over_ids"/>
+                                <field name="dorsal_physiological_passive_ids"/>
+                                <field name="dorsal_special_test_ids"/>
+                                <field name="dorsal_pa_ids"/>
+                                <field name="dorsal_thora_cost_ids"/>
+                                <field name="dorsal_ribs_pa_ids"/>
+                                <field name="dorsal_diaphragm_ids"/>
+                            </page>
+                            <page name='lumbar' string="LUMBAR" attrs="{'invisible': [('lumbar', '=', False)]}">
+                                <field name="lumbar_act_over_ids"/>
+                                <field name="lumbar_accessory_ids"/>
+                                <field name="lumbar_hip_muscle_ids"/>
+                                <field name="lumbar_mckenzie_test_ids"/>
+                                <field name="lumbar_sacroiliac_test_ids"/>
+                            </page>
+                            <page name='superior' string="SUPERIOR MEMBER" attrs="{'invisible': [('superior', '=', False)]}">
+                                <field name="superior_member_ids"/>
+                            </page>
+                            <page name='inferior' string="INFERIOR MEMBER" attrs="{'invisible': [('inferior', '=', False)]}">
+                                <field name="inferior_member_ids"/>
+                            </page>
+                            <page name='temporomandibular' string="TEMPOROMANDIBULAR JOINT" attrs="{'invisible': [('temporomandibular', '=', False)]}">
+                                <field name="temporomandibular_joint_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+

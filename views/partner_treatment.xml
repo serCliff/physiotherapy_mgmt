@@ -197,6 +197,9 @@
                                     <field name="initial_hypothesis"/>
                                 </group>
                             </page>
+                            <page name='treatment_history' string="Treatment">
+                                    <field name="treatment_history_ids" context="{'default_treatment_id': active_id, 'default_partner_id': partner_id}"/>
+                            </page>
                         </notebook>
                     </sheet>
                 </form>

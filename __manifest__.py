@@ -25,6 +25,8 @@
         'views/physiotherapy_view.xml',
         'views/res_partner.xml',
         'views/partner_treatment.xml',
+        'views/treatment_history.xml',
+        'data/treatment_data.xml',
     ],
 
 }

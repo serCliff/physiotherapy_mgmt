@@ -17,9 +17,9 @@ class PartnerTreatment(models.Model):
 
     name = fields.Char("Name", required=True)
     observations = fields.Text("Observations", help="Duration? Origins? Influences?")
-    create_date = fields.Datetime(default=lambda self: fields.Datetime.now(), readonly=True)
 
     treatment_history_ids = fields.One2many("treatment.history", "treatment_id", "Treatment Histories")
+    history_count = fields.Integer(compute='count_history')
 
     # RED FLAGS
     several_illness = fields.Boolean()
@@ -105,6 +105,7 @@ class PartnerTreatment(models.Model):
     # HYPOTHESIS
     initial_hypothesis = fields.Text(required=True)
 
-
-
-
+    @api.multi
+    def count_history(self):
+        if self.history_ids:
+            self.history_count = len(self.history_ids.ids)

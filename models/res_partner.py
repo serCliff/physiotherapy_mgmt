@@ -6,9 +6,10 @@ class PartnerRelatedFields(models.AbstractModel):
     _name = "physiotherapy.fields"
     _description = "Fields related with partner to be used on physiotherapy"
 
+    partner_id = fields.Many2one("res.partner", "Partner", required=True)
+    create_date = fields.Datetime(default=lambda self: fields.Datetime.now())
     company_id = fields.Many2one('res.company', string='Company', index=True,
                                  default=lambda self: self.env.user.company_id.id)
-    partner_id = fields.Many2one("res.partner", "Partner", required=True)
 
     # Partner related fields
     birth_date = fields.Date(related='partner_id.birth_date')
@@ -69,13 +70,13 @@ class ResPartner(models.Model):
         s2 = treatment_fields.difference(['__last_update',
                                           'id',
                                           'company_id',
+                                          'create_date',
                                           'display_name',
                                           'function',
                                           'partner_id'])
         res = s1.intersection(s2)
         if res:
             values['physiotherapy_partner'] = True
-
 
     @api.multi
     def count_treatments(self):
