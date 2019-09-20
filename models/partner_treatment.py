@@ -1,5 +1,5 @@
 from odoo import fields, models, api, _
-
+import pdb
 
 class PartnerTreatment(models.Model):
     _name = 'partner.treatment'
@@ -105,7 +105,26 @@ class PartnerTreatment(models.Model):
     # HYPOTHESIS
     initial_hypothesis = fields.Text(required=True)
 
+    # TREATMENT HISTORY
+    cervical = fields.Boolean()
+    dorsal = fields.Boolean()
+    lumbar = fields.Boolean()
+    superior = fields.Boolean()
+    inferior = fields.Boolean()
+    temporomandibular = fields.Boolean()
+
     @api.multi
     def count_history(self):
-        if self.history_ids:
-            self.history_count = len(self.history_ids.ids)
+        if self.treatment_history_ids:
+            self.history_count = len(self.treatment_history_ids.ids)
+
+    @api.multi
+    def action_make_treatment(self):
+        action = self.env.ref('physiotherapy_mgmt.action_treatment_history_form').read()[0]
+        action['context'] = {'search_default_treatment_id': self.id}
+        if len(self.treatment_history_ids) == 1:
+            action['res_id'] = self.treatment_history_ids.id
+            action['target'] = 'current'
+            action['view_mode'] = 'form'
+            del action['views']
+        return action

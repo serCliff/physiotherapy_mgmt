@@ -24,8 +24,8 @@
         'security/ir.model.access.csv',
         'views/physiotherapy_view.xml',
         'views/res_partner.xml',
-        'views/partner_treatment.xml',
         'views/treatment_history.xml',
+        'views/partner_treatment.xml',
         'data/treatment_data.xml',
     ],
 

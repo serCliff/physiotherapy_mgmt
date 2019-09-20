@@ -9,13 +9,12 @@
             <field name="arch" type="xml">
                 <form string="Treatments">
                     <sheet>
-<!--                        <div class="oe_button_box" name="button_box">-->
-<!--                            <button name="toggle_active" type="object" invisible="1"-->
-<!--                                    class="oe_stat_button" icon="fa-archive">-->
-<!--                                <field name="active" widget="boolean_button"-->
-<!--                                    options='{"terminology": "archive"}'/>-->
-<!--                            </button>-->
-<!--                        </div>-->
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="action_make_treatment"
+                                icon="fa-stethoscope">
+                                <field string="Histories" name="history_count" widget="statinfo"/>
+                            </button>
+                        </div>
                         <div class="oe_title">
                             <h1>
                                 <field name="name" default_focus="1" placeholder="Name"/>
@@ -47,10 +46,20 @@
                                 <field name="familiar_history_id" widget="many2many_tags"/>
                             </group>
                         </group>
+                        <group>
+                            <group>
+                                <field name="cervical" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="dorsal" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="lumbar" widget="boolean_toggle" class="oe_edit_only"/>
+                            </group>
+                            <group>
+                                <field name="superior" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="inferior" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="temporomandibular" widget="boolean_toggle" class="oe_edit_only"/>
+                            </group>
+                        </group>
                         <label for="observations"/>
                         <field name="observations"/>
-
-
                         <notebook>
                             <page name='red_flags' string="Red Flags" autofocus="autofocus">
                                 <group name="red_flags">
@@ -215,7 +224,6 @@
                     <field name="name"/>
                     <field name="partner_id"/>
                     <field name="create_date"/>
-                    <field name="create_date"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                     <field name="observations"/>
                 </tree>
@@ -271,7 +279,6 @@
         </record>
 
 
-
 <!--        MENUITEM-->
         <menuitem id="partner_treatment_menu_crm"
             parent="physiotherapy_mgmt.physiotherapy_menu_root"
@@ -282,6 +289,16 @@
 
     </data>
 </odoo>
+
+<!--                            <button name="toggle_active" type="object" invisible="1"-->
+<!--                                    class="oe_stat_button" icon="fa-archive">-->
+<!--                                <field name="active" widget="boolean_button"-->
+<!--                                    options='{"terminology": "archive"}'/>-->
+<!--                            </button>-->
+<!--                            <button class="oe_stat_button" type="action" name="%(sale.action_treatment_form)d"-->
+<!--                                attrs="{'invisible': [('history_count', '=', 0)]}"-->
+<!--                                icon="fa-usd">-->
+
 
 
         <!--PERMISOS COMERCIAL    -->

@@ -20,55 +20,310 @@
                             </div>
                         </div>
                         <group>
+                            <group name="general">
+                                <field name="birth_date"/>
+                                <field name="gender"/>
+                                <field name="civil_state"/>
+                                <field name="allergies"/>
+                            </group>
+                            <group name="work_info">
+                                <field name="function" placeholder="e.g. Sales Director"/>
+                                <field name="style_of_life"/>
+                            </group>
+                            <group name="sports">
+                                <field name="sport_practice" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="sport_id" attrs="{'invisible': [('sport_practice', '=', False)]}"/>
+                                <field name="sport_periodicity" attrs="{'invisible': [('sport_practice', '=', False)]}"/>
+                            </group>
+                            <group name="history">
+                                <field name="personal_history_id" widget="many2many_tags"/>
+                                <field name="familiar_history_id" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <group>
                             <group>
-                                <field name="cervical" widget="boolean_toggle" class="oe_edit_only"/>
-                                <field name="dorsal" widget="boolean_toggle" class="oe_edit_only"/>
-                                <field name="lumbar" widget="boolean_toggle" class="oe_edit_only"/>
-                                <field name="superior" widget="boolean_toggle" class="oe_edit_only"/>
-                                <field name="inferior" widget="boolean_toggle" class="oe_edit_only"/>
-                                <field name="temporomandibular" widget="boolean_toggle" class="oe_edit_only"/>
+                                <field name="cervical" invisible="1"/>
+                                <field name="dorsal" invisible="1"/>
+                                <field name="lumbar" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="superior" invisible="1"/>
+                                <field name="inferior" invisible="1"/>
+                                <field name="temporomandibular" invisible="1"/>
                             </group>
                         </group>
                         <notebook>
                             <page name='cervical' string="CERVICAL" autofocus="autofocus" attrs="{'invisible': [('cervical', '=', False)]}">
-                                <field name="cervical_act_over_ids"/>
-                                <field name="cervical_dif_test_ids"/>
-                                <field name="cervical_quadrant_ids"/>
-                                <field name="cervical_pa_ids"/>
-                                <field name="cervical_physiological_passive_ids"/>
-                                <field name="cervical_special_test_ids"/>
-                                <field name="cervical_evaluation_ids"/>
+                                <separator string="Movements Active and Overpressure"/>
+                                <field name="cervical_act_over_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Movement/Side"/>
+                                        <field name="type1_right" string="Active Right"/>
+                                        <field name="type1_left" string="Overpressure Right"/>
+                                        <field name="type2_right" string="Active Left"/>
+                                        <field name="type2_left" string="Overpressure Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="Differentiation Test"/>
+                                <field name="cervical_dif_test_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Test"/>
+                                        <field name="type1_right" string="Cervicals"/>
+                                        <field name="type1_left" string="Dorsals"/>
+                                    </tree>
+                                </field>
+                                <separator string="Quadrant Test"/>
+                                <field name="cervical_quadrant_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Quadrant"/>
+                                        <field name="type1_right" string="Superior"/>
+                                        <field name="type1_left" string="Inferior"/>
+                                    </tree>
+                                </field>
+                                <separator string="PA Movements"/>
+                                <field name="cervical_pa_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Movement"/>
+                                        <field name="central" string="Centrals"/>
+                                        <field name="type1_right" string="Unilateral Right"/>
+                                        <field name="type1_left" string="Unilateral Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="Pasive fisiological movements"/>
+                                <field name="cervical_physiological_passive_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Movement/Side"/>
+                                        <field name="type1_right" string="Right"/>
+                                        <field name="type1_left" string="Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="Special test"/>
+                                <field name="cervical_special_test_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Test"/>
+                                        <field name="type1_right" string="Positive"/>
+                                        <field name="type1_left" string="Negative"/>
+                                    </tree>
+                                </field>
+                                <separator string="Neck and head muscle evaluation"/>
+                                <field name="cervical_evaluation_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Muscle"/>
+                                        <field name="type1_right" string="Active Right"/>
+                                        <field name="type1_left" string="Latent Right"/>
+                                        <field name="type2_right" string="Active Left"/>
+                                        <field name="type2_left" string="Latent Left"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page name='dorsal' string="DORSAL" attrs="{'invisible': [('dorsal', '=', False)]}">
-                                <field name="dorsal_act_over_ids"/>
-                                <field name="dorsal_physiological_passive_ids"/>
-                                <field name="dorsal_special_test_ids"/>
-                                <field name="dorsal_pa_ids"/>
-                                <field name="dorsal_thora_cost_ids"/>
-                                <field name="dorsal_ribs_pa_ids"/>
-                                <field name="dorsal_diaphragm_ids"/>
+                                <separator string="Movements Active and Overpressure"/>
+                                <field name="dorsal_act_over_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Movement/Side"/>
+                                        <field name="type1_right" string="Active Right"/>
+                                        <field name="type1_left" string="Overpressure Right"/>
+                                        <field name="type2_right" string="Active Left"/>
+                                        <field name="type2_left" string="Overpressure Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="Pasive fisiological movements"/>
+                                <field name="dorsal_physiological_passive_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Movement/Side"/>
+                                        <field name="type1_right" string="Right"/>
+                                        <field name="type1_left" string="Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="Special test"/>
+                                <field name="dorsal_special_test_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Test"/>
+                                        <field name="type1_right" string="Positive"/>
+                                        <field name="type1_left" string="Negative"/>
+                                    </tree>
+                                </field>
+                                <separator string="PA Movements"/>
+                                <field name="dorsal_pa_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Movement"/>
+                                        <field name="central" string="Central"/>
+                                        <field name="type1_right" string="Unilateral Right"/>
+                                        <field name="type1_left" string="Unilateral Left"/>
+                                        <field name="type2_right" string="Transversal Right"/>
+                                        <field name="type2_left" string="Transversal Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="Thoracic evaluation and Costal displacement during breathing"/>
+                                <field name="dorsal_thora_cost_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Breathing"/>
+                                        <field name="type1_right" string="Hemitorax Right"/>
+                                        <field name="type1_left" string="Hemitorax Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="PA Ribs evaluation"/>
+                                <field name="dorsal_ribs_pa_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Rib"/>
+                                        <field name="type1_right" string="Transverse cost, Corporeal, Sternocostal Right"/>
+                                        <field name="type1_left" string="Transverse cost Left"/>
+                                        <field name="type2_right" string="Corporeal Right"/>
+                                        <field name="type2_left" string="Corporeal Left"/>
+                                        <field name="type3_right" string="Sternocostal Right"/>
+                                        <field name="type3_left" string="Sternocostal Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="Diaphragm evaluation"/>
+                                <field name="dorsal_diaphragm_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Muscle"/>
+                                        <field name="type1_right" string="Right"/>
+                                        <field name="type1_left" string="Left"/>
+                                        <field name="central" string="Central"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page name='lumbar' string="LUMBAR" attrs="{'invisible': [('lumbar', '=', False)]}">
-                                <field name="lumbar_act_over_ids"/>
-                                <field name="lumbar_accessory_ids"/>
-                                <field name="lumbar_hip_muscle_ids"/>
-                                <field name="lumbar_mckenzie_test_ids"/>
-                                <field name="lumbar_sacroiliac_test_ids"/>
+                                <separator string="Movements Active and Overpressure"/>
+                                <field name="lumbar_act_over_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Movement/Side"/>
+                                        <field name="type1_right" string="Active Right"/>
+                                        <field name="type1_left" string="Overpressure Right"/>
+                                        <field name="type2_right" string="Active Left"/>
+                                        <field name="type2_left" string="Overpressure Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="PA Accessory mobilization"/>
+                                <field name="lumbar_accessory_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Mobilization"/>
+                                        <field name="central" string="Central"/>
+                                        <field name="type1_right" string="Unilateral Right"/>
+                                        <field name="type1_left" string="Unilateral Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="Lumbar and hip muscle evaluation"/>
+                                <field name="lumbar_hip_muscle_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Muscle"/>
+                                        <field name="type1_right" string="Active Right"/>
+                                        <field name="type1_left" string="Active Left"/>
+                                        <field name="type2_right" string="Latent Right"/>
+                                        <field name="type2_left" string="Latent Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="Mckenzie Test"/>
+                                <field name="lumbar_mckenzie_test_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Type"/>
+                                        <field name="type1_right" string="Unilateral knee pain Right"/>
+                                        <field name="type1_left" string="Unilateral knee pain Left"/>
+                                        <field name="type2_right" string="Bilateral pain Right"/>
+                                        <field name="type2_left" string="Bilateral pain Left"/>
+                                        <field name="type3_right" string="Unilateral pain below the knee Right"/>
+                                        <field name="type3_left" string="Unilateral pain below the knee Left"/>
+                                    </tree>
+                                </field>
+                                <separator string="Sacroiliaca Test"/>
+                                <field name="lumbar_sacroiliac_test_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Test"/>
+                                        <field name="type1_right" string="Right"/>
+                                        <field name="type1_left" string="Left"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page name='superior' string="SUPERIOR MEMBER" attrs="{'invisible': [('superior', '=', False)]}">
-                                <field name="superior_member_ids"/>
+                                <field name="superior_member_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Test"/>
+                                        <field name="type1_right" string="Right"/>
+                                        <field name="type1_left" string="Left"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page name='inferior' string="INFERIOR MEMBER" attrs="{'invisible': [('inferior', '=', False)]}">
-                                <field name="inferior_member_ids"/>
+                                <field name="inferior_member_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Test"/>
+                                        <field name="type1_right" string="Right"/>
+                                        <field name="type1_left" string="Left"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page name='temporomandibular' string="TEMPOROMANDIBULAR JOINT" attrs="{'invisible': [('temporomandibular', '=', False)]}">
-                                <field name="temporomandibular_joint_ids"/>
+                                <field name="temporomandibular_joint_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" string="Test"/>
+                                        <field name="type1_right" string="Right"/>
+                                        <field name="type1_left" string="Left"/>
+                                    </tree>
+                                </field>
                             </page>
                         </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
+
+<!--        TREE-->
+        <record id="view_treatment_history_tree" model="ir.ui.view">
+            <field name="name">treatment.history.tree</field>
+            <field name="model">treatment.history</field>
+            <field name="arch" type="xml">
+                <tree string="Treatment History">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="create_date"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+<!--        SEARCH FILTERS-->
+        <record id="view_treatment_history_filter" model="ir.ui.view">
+            <field name="name">treatment.history.search</field>
+            <field name="model">treatment.history</field>
+            <field name="arch" type="xml">
+                <search string="Treatment History">
+                    <field name="name" string="Treatment" filter_domain="[('name','ilike',self)]"/>
+                    <field name="partner_id" />
+                    <field name="treatment_id"/>
+                    <group expand="0" string="Group By">
+                        <filter name="partner_id" string="Partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter name="create_date" string="Create Date" domain="[]" context="{'group_by':'create_date'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+
+<!--        ACTIONS-->
+        <record id="action_treatment_history_form" model="ir.actions.act_window">
+            <field name="name">History</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">treatment.history</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_treatment_history_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a treatment history for a partner.
+              </p>
+            </field>
+        </record>
+
+
+<!--        MENUITEM-->
+        <menuitem id="partner_treatment_history_menu_crm"
+            parent="physiotherapy_mgmt.physiotherapy_menu_root"
+            action="physiotherapy_mgmt.action_treatment_history_form"
+            sequence="2"/>
+
 
     </data>
 </odoo>
