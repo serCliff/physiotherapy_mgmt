@@ -82,3 +82,14 @@ class ResPartner(models.Model):
     def count_treatments(self):
         if self.treatment_ids:
             self.treatment_count = len(self.treatment_ids.ids)
+
+    @api.multi
+    def action_make_treatment(self):
+        action = self.env.ref('physiotherapy_mgmt.action_treatment_form').read()[0]
+        action['context'] = {'search_default_partner_id': self.id}
+        if len(self.treatment_ids) == 1:
+            action['res_id'] = self.treatment_ids.id
+            action['target'] = 'current'
+            action['view_mode'] = 'form'
+            del action['views']
+        return action

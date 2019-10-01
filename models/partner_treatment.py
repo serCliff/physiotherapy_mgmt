@@ -4,7 +4,7 @@ import pdb
 class PartnerTreatment(models.Model):
     _name = 'partner.treatment'
     _inherit = ['physiotherapy.fields']
-    _description = "Historical of some illness treatment"
+    _description = "Historical of some illness treatment. A treatment have some treatment.history"
 
     _sql_constraints = [
         ('intensity_now',
@@ -119,7 +119,7 @@ class PartnerTreatment(models.Model):
             self.history_count = len(self.treatment_history_ids.ids)
 
     @api.multi
-    def action_make_treatment(self):
+    def action_make_session(self):
         action = self.env.ref('physiotherapy_mgmt.action_treatment_history_form').read()[0]
         action['context'] = {'search_default_treatment_id': self.id}
         if len(self.treatment_history_ids) == 1:

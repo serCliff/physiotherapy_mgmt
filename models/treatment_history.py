@@ -4,7 +4,7 @@ from odoo import fields, models, api
 class TreatmentHistory(models.Model):
     _name = 'treatment.history'
     _inherit = ['physiotherapy.fields']
-    _description = "Each of histories of a treatment"
+    _description = "Each of sessions of a treatment"
 
     active = fields.Boolean(default=True)
     name = fields.Char("Name", required=True)

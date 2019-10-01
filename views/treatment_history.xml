@@ -7,7 +7,7 @@
             <field name="model">treatment.history</field>
             <field name="priority" eval="1"/>
             <field name="arch" type="xml">
-                <form string="History">
+                <form string="Session">
                     <sheet>
                         <div class="oe_title">
                             <h1>
@@ -273,7 +273,7 @@
             <field name="name">treatment.history.tree</field>
             <field name="model">treatment.history</field>
             <field name="arch" type="xml">
-                <tree string="Treatment History">
+                <tree string="Sessions">
                     <field name="name"/>
                     <field name="partner_id"/>
                     <field name="create_date"/>
@@ -289,8 +289,8 @@
             <field name="name">treatment.history.search</field>
             <field name="model">treatment.history</field>
             <field name="arch" type="xml">
-                <search string="Treatment History">
-                    <field name="name" string="Treatment" filter_domain="[('name','ilike',self)]"/>
+                <search string="Sessions">
+                    <field name="name" string="Session" filter_domain="[('name','ilike',self)]"/>
                     <field name="partner_id" />
                     <field name="treatment_id"/>
                     <group expand="0" string="Group By">
@@ -304,7 +304,7 @@
 
 <!--        ACTIONS-->
         <record id="action_treatment_history_form" model="ir.actions.act_window">
-            <field name="name">History</field>
+            <field name="name">Session</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">treatment.history</field>
             <field name="view_type">form</field>

@@ -9,6 +9,13 @@
             <field name="groups_id" eval="[(4, ref('physiotherapy_mgmt.group_physiotherapy_doctor'))]"/>
             <field name="arch" type="xml">
 
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="action_make_treatment"
+                        icon="fa-stethoscope">
+                        <field string="Treatments" name="treatment_count" widget="statinfo"/>
+                    </button>
+                </div>
+
               <!--Physiotherapy Data-->
                 <notebook position="inside">
                     <page name="physioterapy" string="Physioterapy">
@@ -54,6 +61,10 @@
                                 class="oe_stat_button" icon="fa-archive">
                             <field name="active" widget="boolean_button"
                                 options='{"terminology": "archive"}'/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="action_make_treatment"
+                            icon="fa-stethoscope">
+                            <field string="Treatments" name="treatment_count" widget="statinfo"/>
                         </button>
                     </div>
                     <field name="image" widget='image' class="oe_avatar" options='{"preview_image": "image_medium", "size": [90, 90]}'/>
