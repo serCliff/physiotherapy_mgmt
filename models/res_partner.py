@@ -1,4 +1,5 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
+from odoo.exceptions import ValidationError
 import pdb
 
 
@@ -6,6 +7,7 @@ class PartnerRelatedFields(models.AbstractModel):
     _name = "physiotherapy.fields"
     _description = "Fields related with partner to be used on physiotherapy"
 
+    active = fields.Boolean(default=True)
     partner_id = fields.Many2one("res.partner", "Partner", required=True)
     create_date = fields.Datetime(default=lambda self: fields.Datetime.now())
     company_id = fields.Many2one('res.company', string='Company', index=True,
@@ -23,6 +25,18 @@ class PartnerRelatedFields(models.AbstractModel):
     sport_periodicity = fields.Selection(related='partner_id.sport_periodicity')
     personal_history_id = fields.Many2many(related='partner_id.personal_history_id')
     familiar_history_id = fields.Many2many(related='partner_id.familiar_history_id')
+
+    @api.multi
+    def unlink(self):
+        """
+        Ensure that the templates can't be deleted
+        """
+        template_id = self.env.ref("physiotherapy_mgmt.template_%s" % self._table)
+        is_template = template_id.id == self.id
+
+        if is_template:
+            raise ValidationError(_('Template record can\'t be deleted!!'))
+        return super().unlink()
 
 
 class ResPartner(models.Model):
@@ -68,6 +82,7 @@ class ResPartner(models.Model):
         # Get all physiotherapy fields and remove no needed standard fields
         treatment_fields = set(self.env['physiotherapy.fields'].fields_get().keys())
         s2 = treatment_fields.difference(['__last_update',
+                                          'active',
                                           'id',
                                           'company_id',
                                           'create_date',

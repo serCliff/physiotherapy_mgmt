@@ -2,11 +2,18 @@
 <odoo>
     <data noupdate="1">
 
-        <record id="template_treatment_history" model="treatment.history">
+        <record id="template_partner_treatment" model="partner.treatment">
             <field name="name">Treatment Template</field>
             <field name="active">False</field>
             <field name="partner_id">1</field>
+            <field name="initial_hypothesis">/</field>
         </record>
 
+        <record id="template_treatment_history" model="treatment.history">
+            <field name="name">Session Template</field>
+            <field name="active">False</field>
+            <field name="partner_id">1</field>
+            <field name="treatment_id" ref="physiotherapy_mgmt.template_partner_treatment"/>
+        </record>
     </data>
 </odoo>

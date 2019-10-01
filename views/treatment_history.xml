@@ -301,6 +301,17 @@
              </field>
          </record>
 
+        <record id="view_treatment_history_filter_manager" model="ir.ui.view">
+            <field name="name">treatment.history.search.manager</field>
+            <field name="model">treatment.history</field>
+            <field name="groups_id" eval="[(4, ref('physiotherapy_mgmt.group_physiotherapy_manager'))]"/>
+            <field name="arch" type="xml">
+                <field name="treatment_id" position="after">
+                    <filter name="template" string="Template" domain="[('active', '=', False)]"/>
+                </field>
+             </field>
+        </record>
+
 
 <!--        ACTIONS-->
         <record id="action_treatment_history_form" model="ir.actions.act_window">
