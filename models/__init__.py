@@ -1,3 +1,4 @@
+from . import physiotherapy_fields
 from . import res_partner
 from . import familiar_history
 from . import partner_sport

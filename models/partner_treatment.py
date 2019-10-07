@@ -1,6 +1,7 @@
 from odoo import fields, models, api, _
 import pdb
 
+
 class PartnerTreatment(models.Model):
     _name = 'partner.treatment'
     _inherit = ['physiotherapy.fields']
@@ -106,12 +107,12 @@ class PartnerTreatment(models.Model):
     initial_hypothesis = fields.Text(required=True)
 
     # TREATMENT HISTORY
-    cervical = fields.Boolean()
-    dorsal = fields.Boolean()
-    lumbar = fields.Boolean()
-    superior = fields.Boolean()
-    inferior = fields.Boolean()
-    temporomandibular = fields.Boolean()
+    cervical = fields.Boolean(default=lambda self: self._default_values('cervical'))
+    dorsal = fields.Boolean(default=lambda self: self._default_values('dorsal'))
+    lumbar = fields.Boolean(default=lambda self: self._default_values('lumbar'))
+    superior = fields.Boolean(default=lambda self: self._default_values('superior'))
+    inferior = fields.Boolean(default=lambda self: self._default_values('inferior'))
+    temporomandibular = fields.Boolean(default=lambda self: self._default_values('temporomandibular'))
 
     @api.multi
     def count_history(self):

@@ -3,42 +3,6 @@ from odoo.exceptions import ValidationError
 import pdb
 
 
-class PartnerRelatedFields(models.AbstractModel):
-    _name = "physiotherapy.fields"
-    _description = "Fields related with partner to be used on physiotherapy"
-
-    active = fields.Boolean(default=True)
-    partner_id = fields.Many2one("res.partner", "Partner", required=True)
-    create_date = fields.Datetime(default=lambda self: fields.Datetime.now())
-    company_id = fields.Many2one('res.company', string='Company', index=True,
-                                 default=lambda self: self.env.user.company_id.id)
-
-    # Partner related fields
-    birth_date = fields.Date(related='partner_id.birth_date')
-    gender = fields.Selection(related='partner_id.gender')
-    civil_state = fields.Selection(related='partner_id.civil_state')
-    allergies = fields.Char(related='partner_id.allergies')
-    function = fields.Char(related='partner_id.function')
-    style_of_life = fields.Char(related='partner_id.style_of_life')
-    sport_practice = fields.Boolean(related='partner_id.sport_practice')
-    sport_id = fields.Many2one(related='partner_id.sport_id')
-    sport_periodicity = fields.Selection(related='partner_id.sport_periodicity')
-    personal_history_id = fields.Many2many(related='partner_id.personal_history_id')
-    familiar_history_id = fields.Many2many(related='partner_id.familiar_history_id')
-
-    @api.multi
-    def unlink(self):
-        """
-        Ensure that the templates can't be deleted
-        """
-        template_id = self.env.ref("physiotherapy_mgmt.template_%s" % self._table)
-        is_template = template_id.id == self.id
-
-        if is_template:
-            raise ValidationError(_('Template record can\'t be deleted!!'))
-        return super().unlink()
-
-
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 

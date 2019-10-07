@@ -9,17 +9,20 @@
             <field name="arch" type="xml">
                 <form string="Session">
                     <sheet>
+                        <div class="oe_button_box" name="button_box" attrs="{'invisible': [('active', '=', False)]}">
+                            <field name="active" invisible="1"/>
+                        </div>
                         <div class="oe_title">
                             <h1>
-                                <field name="name" default_focus="1" placeholder="Name"/>
+                                <field name="name" default_focus="1" placeholder="Name" attrs="{'readonly': [('active', '=', False)]}"/>
                             </h1>
-                            <div class="o_row">
+                            <div class="o_row" attrs="{'invisible': [('active', '=', False)]}">
                                 <field name="partner_id"/>
                                 <field name="treatment_id"/>
                                 <field name="create_date" readonly="True"/>
                             </div>
                         </div>
-                        <group>
+                        <group attrs="{'invisible': [('active', '=', False)]}">
                             <group name="general">
                                 <field name="birth_date"/>
                                 <field name="gender"/>
@@ -53,7 +56,7 @@
                             </group>
                         </group>
                         <notebook>
-                            <page name='cervical' string="CERVICAL" autofocus="autofocus" attrs="{'invisible': [('cervical', '=', False)]}">
+                            <page name='cervical' string="CERVICAL" autofocus="autofocus" attrs="{'invisible': ['&amp;',('cervical', '=', False), ('active', '=', True)]}">
                                 <separator string="Movements Active and Overpressure"/>
                                 <field name="cervical_act_over_ids">
                                     <tree editable="bottom">
@@ -116,7 +119,7 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page name='dorsal' string="DORSAL" attrs="{'invisible': [('dorsal', '=', False)]}">
+                            <page name='dorsal' string="DORSAL" attrs="{'invisible': ['&amp;',('dorsal', '=', False), ('active', '=', True)]}">
                                 <separator string="Movements Active and Overpressure"/>
                                 <field name="dorsal_act_over_ids">
                                     <tree editable="bottom">
@@ -184,7 +187,7 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page name='lumbar' string="LUMBAR" attrs="{'invisible': [('lumbar', '=', False)]}">
+                            <page name='lumbar' string="LUMBAR" attrs="{'invisible': ['&amp;',('lumbar', '=', False), ('active', '=', True)]}">
                                 <separator string="Movements Active and Overpressure"/>
                                 <field name="lumbar_act_over_ids">
                                     <tree editable="bottom">
@@ -235,7 +238,7 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page name='superior' string="SUPERIOR MEMBER" attrs="{'invisible': [('superior', '=', False)]}">
+                            <page name='superior' string="SUPERIOR MEMBER" attrs="{'invisible': ['&amp;',('superior', '=', False), ('active', '=', True)]}">
                                 <field name="superior_member_ids">
                                     <tree editable="bottom">
                                         <field name="name" string="Test"/>
@@ -244,7 +247,7 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page name='inferior' string="INFERIOR MEMBER" attrs="{'invisible': [('inferior', '=', False)]}">
+                            <page name='inferior' string="INFERIOR MEMBER" attrs="{'invisible': ['&amp;',('inferior', '=', False), ('active', '=', True)]}">
                                 <field name="inferior_member_ids">
                                     <tree editable="bottom">
                                         <field name="name" string="Test"/>
@@ -253,7 +256,7 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page name='temporomandibular' string="TEMPOROMANDIBULAR JOINT" attrs="{'invisible': [('temporomandibular', '=', False)]}">
+                            <page name='temporomandibular' string="TEMPOROMANDIBULAR JOINT" attrs="{'invisible': ['&amp;',('temporomandibular', '=', False), ('active', '=', True)]}">
                                 <field name="temporomandibular_joint_ids">
                                     <tree editable="bottom">
                                         <field name="name" string="Test"/>

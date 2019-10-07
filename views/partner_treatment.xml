@@ -9,23 +9,24 @@
             <field name="arch" type="xml">
                 <form string="Treatments">
                     <sheet>
-                        <div class="oe_button_box" name="button_box">
+                        <div class="oe_button_box" name="button_box" attrs="{'invisible': [('active', '=', False)]}">
                             <button class="oe_stat_button" type="object" name="action_make_session"
                                 icon="fa-stethoscope">
                                 <field string="Sessions" name="history_count" widget="statinfo"/>
                             </button>
+                            <field name="active" invisible="1"/>
                         </div>
                         <div class="oe_title">
                             <h1>
-                                <field name="name" default_focus="1" placeholder="Name"/>
+                                <field name="name" default_focus="1" placeholder="Name" attrs="{'readonly': [('active', '=', False)]}"/>
                             </h1>
-                            <div class="o_row">
+                            <div class="o_row" attrs="{'invisible': [('active', '=', False)]}">
                                 <field name="partner_id"/>
                                 <field name="create_date" readonly="True"/>
                             </div>
                         </div>
 
-                        <group>
+                        <group attrs="{'invisible': [('active', '=', False)]}">
                             <group name="general">
                                 <field name="birth_date"/>
                                 <field name="gender"/>
@@ -58,9 +59,9 @@
                                 <field name="temporomandibular" widget="boolean_toggle" class="oe_edit_only"/>
                             </group>
                         </group>
-                        <label for="observations"/>
-                        <field name="observations"/>
-                        <notebook>
+                        <label for="observations" attrs="{'invisible': [('active', '=', False)]}"/>
+                        <field name="observations" attrs="{'invisible': [('active', '=', False)]}"/>
+                        <notebook attrs="{'invisible': [('active', '=', False)]}">
                             <page name='red_flags' string="Red Flags" autofocus="autofocus">
                                 <group name="red_flags">
                                     <label for="several_illness"/>
