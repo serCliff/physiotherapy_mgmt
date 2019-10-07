@@ -13,7 +13,7 @@
             <field name="name">Session Template</field>
             <field name="active">False</field>
             <field name="partner_id">1</field>
-            <field name="treatment_id" ref="physiotherapy_mgmt.template_partner_treatment"/>
+            <field name="treatment_id" ref="template_partner_treatment"/>
         </record>
     </data>
 </odoo>

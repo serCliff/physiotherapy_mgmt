@@ -169,7 +169,7 @@
                                 <field name="dorsal_ribs_pa_ids">
                                     <tree editable="bottom">
                                         <field name="name" string="Rib"/>
-                                        <field name="type1_right" string="Transverse cost, Corporeal, Sternocostal Right"/>
+                                        <field name="type1_right" string="Transverse cost Right"/>
                                         <field name="type1_left" string="Transverse cost Left"/>
                                         <field name="type2_right" string="Corporeal Right"/>
                                         <field name="type2_left" string="Corporeal Left"/>
@@ -304,17 +304,17 @@
              </field>
          </record>
 
-        <record id="view_treatment_history_filter_manager" model="ir.ui.view">
+        <record model="ir.ui.view" id="view_treatment_history_filter_manager">
             <field name="name">treatment.history.search.manager</field>
             <field name="model">treatment.history</field>
+            <field name="inherit_id" ref="physiotherapy_mgmt.view_treatment_history_filter"/>
             <field name="groups_id" eval="[(4, ref('physiotherapy_mgmt.group_physiotherapy_manager'))]"/>
             <field name="arch" type="xml">
-                <field name="treatment_id" position="after">
+                <xpath expr="//field[@name='treatment_id']" position="after">
                     <filter name="template" string="Template" domain="[('active', '=', False)]"/>
-                </field>
-             </field>
+                </xpath>
+            </field>
         </record>
-
 
 <!--        ACTIONS-->
         <record id="action_treatment_history_form" model="ir.actions.act_window">
