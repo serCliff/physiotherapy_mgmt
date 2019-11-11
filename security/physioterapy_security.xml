@@ -18,4 +18,74 @@
         <field name="category_id" ref="physiotherapy_mgmt.module_physiotherapy_mgmt"/>
     </record>
 
+    <record model="ir.rule" id="access_treatment_history">
+        <field name="name">treatment.history.read</field>
+        <field name="model_id" ref="model_treatment_history"/>
+        <field name="groups" eval="[(4, ref('group_physiotherapy_doctor'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+    </record>
+
+    <record model="ir.rule" id="access_partner_sport">
+        <field name="name">partner_sport</field>
+        <field name="model_id" ref="model_partner_sport"/>
+        <field name="groups" eval="[(4, ref('group_physiotherapy_doctor'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="perm_write" eval="False"/>
+    </record>
+
+    <record model="ir.rule" id="access_partner_sport_manager">
+        <field name="name">partner_sport_manager</field>
+        <field name="model_id" ref="model_partner_sport"/>
+        <field name="groups" eval="[(4, ref('group_physiotherapy_manager'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+    </record>
+
+    <record model="ir.rule" id="access_familiar_history">
+        <field name="name">familiar_history</field>
+        <field name="model_id" ref="model_familiar_history"/>
+        <field name="groups" eval="[(4, ref('group_physiotherapy_doctor'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="perm_write" eval="False"/>
+    </record>
+
+    <record model="ir.rule" id="access_familiar_history_manager">
+        <field name="name">familiar_history_manager</field>
+        <field name="model_id" ref="model_familiar_history"/>
+        <field name="groups" eval="[(4, ref('group_physiotherapy_manager'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+    </record>
+
+    <record model="ir.rule" id="access_personal_history">
+        <field name="name">personal_history</field>
+        <field name="model_id" ref="model_personal_history"/>
+        <field name="groups" eval="[(4, ref('group_physiotherapy_doctor'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="perm_write" eval="False"/>
+    </record>
+
+    <record model="ir.rule" id="access_personal_history_manager">
+        <field name="name">personal_history_manager</field>
+        <field name="model_id" ref="model_personal_history"/>
+        <field name="groups" eval="[(4, ref('group_physiotherapy_manager'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+    </record>
+
 </odoo>

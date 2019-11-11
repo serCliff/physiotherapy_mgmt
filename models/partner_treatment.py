@@ -16,6 +16,8 @@ class PartnerTreatment(models.Model):
          'The intensity when it hurst the most should be between 0% and 10!'),
     ]
 
+    active = fields.Boolean(default=True)
+
     name = fields.Char("Name", required=True)
     observations = fields.Text("Observations", help="Duration? Origins? Influences?")
 

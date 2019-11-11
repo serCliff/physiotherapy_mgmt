@@ -40,20 +40,24 @@ class PartnerRelatedFields(models.AbstractModel):
 
     @api.multi
     def _default_values(self, var):
-        item = self.env.ref('physiotherapy_mgmt.template_{0}'.format(self._table))
-        var_type = item.fields_get().get(var).get('type')
-        if var_type not in ('one2many', 'many2one', 'many2many'):
-            return item.mapped(var)[0]
-        elif var_type == 'many2one':
-            return item.mapped(var).id
-        elif var_type == 'many2many':
-            return [(6, False, item.mapped(var).ids)]
-        else:
-            copy_ids = list()
-            for register in item.mapped(var):
-                new_id = register.copy()
-                new_id.write({var: False})
-                copy_ids.append(new_id.id)
-            return [(6, False, copy_ids)]
+        # item = self.env.ref('physiotherapy_mgmt.template_{0}'.format(self._table))
+        # item = self.env
+        item = self.env[self._name].search([('active', '=', False)], limit=1)
+
+        if item:
+            var_type = item.fields_get().get(var).get('type')
+            if var_type not in ('one2many', 'many2one', 'many2many'):
+                return item.mapped(var)[0]
+            elif var_type == 'many2one':
+                return item.mapped(var).id
+            elif var_type == 'many2many':
+                return [(6, False, item.mapped(var).ids)]
+            else:
+                copy_ids = list()
+                for register in item.mapped(var):
+                    new_id = register.copy()
+                    new_id.write({var: False})
+                    copy_ids.append(new_id.id)
+                return [(6, False, copy_ids)]
 
 
