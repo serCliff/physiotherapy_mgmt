@@ -336,9 +336,8 @@
         <menuitem id="partner_treatment_history_menu_crm"
             parent="physiotherapy_mgmt.physiotherapy_menu_root"
             action="physiotherapy_mgmt.action_treatment_history_form"
-            sequence="2"/>
+            sequence="3"/>
 
 
     </data>
 </odoo>
-
