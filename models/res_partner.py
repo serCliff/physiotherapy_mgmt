@@ -59,8 +59,9 @@ class ResPartner(models.Model):
 
     @api.multi
     def count_treatments(self):
-        if self.treatment_ids:
-            self.treatment_count = len(self.treatment_ids.ids)
+        for self in self:
+            if self.treatment_ids:
+                self.treatment_count = len(self.treatment_ids.ids)
 
     @api.multi
     def action_make_treatment(self):
